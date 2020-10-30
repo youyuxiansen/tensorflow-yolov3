@@ -21,6 +21,7 @@ cfg = __C
 
 # YOLO options
 __C.YOLO = edict()
+__C.CVMART = edict()
 
 # Set the class name
 __C.YOLO.CLASSES = "./train/src_repo/src/tensorflow-yolov3/data/classes/coco.names"
@@ -32,6 +33,17 @@ __C.YOLO.IOU_LOSS_THRESH = 0.5
 __C.YOLO.UPSAMPLE_METHOD = "resize"
 __C.YOLO.ORIGINAL_WEIGHT = "./train/src_repo/src/tensorflow-yolov3/checkpoint/yolov3_coco.ckpt"
 __C.YOLO.DEMO_WEIGHT = "./train/src_repo/src/tensorflow-yolov3/checkpoint/yolov3_coco_demo.ckpt"
+
+# Set the cvmart class name
+__C.CVMART.CLASSES = "./train/src_repo/src/tensorflow-yolov3/data/classes/coco.names"
+__C.CVMART.ANCHORS = "./train/src_repo/src/tensorflow-yolov3/data/anchors/basline_anchors.txt"
+__C.CVMART.MOVING_AVE_DECAY = 0.9995
+__C.CVMART.STRIDES = [8, 16, 32]
+__C.CVMART.ANCHOR_PER_SCALE = 3
+__C.CVMART.IOU_LOSS_THRESH = 0.5
+__C.CVMART.UPSAMPLE_METHOD = "resize"
+__C.CVMART.ORIGINAL_WEIGHT = "./train/src_repo/src/tensorflow-yolov3/checkpoint/yolov3_coco.ckpt"
+__C.CVMART.DEMO_WEIGHT = "./train/src_repo/src/tensorflow-yolov3/checkpoint/yolov3_coco_demo.ckpt"
 
 # Train options
 __C.TRAIN = edict()

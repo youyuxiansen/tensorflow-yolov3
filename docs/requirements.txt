@@ -6,9 +6,9 @@ wget==3.2
 seaborn==0.9.0
 pandas
 matplotlib
-pillow
 tensorboard
 pycocotools
 easydict
 lxml
 tqdm
+re

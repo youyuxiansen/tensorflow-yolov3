@@ -1,9 +1,11 @@
 import tensorflow as tf
 from core.yolov3 import YOLOV3
+import numpy as np
 
 iput_size = 416
-darknet_weights = '<your yolov3.weights' path>'
-ckpt_file = './checkpoint/yolov3_coco.ckpt'
+darknet_weights = './train/src_repo/src/tensorflow-yolov3/checkpoint/yolov3.weight'
+ckpt_file = './train/src_repo/src/tensorflow-yolov3/checkpoint/yolov3_coco.ckpt'
+
 
 def load_weights(var_list, weights_file):
     """
@@ -51,6 +53,8 @@ def load_weights(var_list, weights_file):
             shape = var1.shape.as_list()
             num_params = np.prod(shape)
 
+            if ptr + num_params > len(weights):
+                raise IndexError('Index exceeds maximum length of weights')
             var_weights = weights[ptr:ptr + num_params].reshape(
                 (shape[3], shape[2], shape[0], shape[1]))
             # remember to transpose to column-major
@@ -61,9 +65,10 @@ def load_weights(var_list, weights_file):
             i += 1
     print('ptr:', ptr)
     return assign_ops
-    
+
+
 with tf.name_scope('input'):
-    input_data = tf.placeholder(dtype=tf.float32,shape=(None, iput_size, iput_size, 3), name='input_data')
+    input_data = tf.placeholder(dtype=tf.float32, shape=(None, iput_size, iput_size, 3), name='input_data')
 model = YOLOV3(input_data, trainable=False)
 load_ops = load_weights(tf.global_variables(), darknet_weights)
 
